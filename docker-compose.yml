@@ -1,1 +1,60 @@
+version: '2'
+services:
+  transmission:
+    image: robsharp/rpi-transmission
+    container_name: transmission
+    restart: always
+    environment:
+      - VIRTUAL_HOST=transmission.serverpi.home
+      - VIRTUAL_PORT=9091
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    volumes:
+      - /media/usb/downloading:/var/lib/transmission-daemon/downloads
+      - ~/transmission-daemon:/etc/transmission-daemon
 
+  owncloud:
+    image: fmemon/rpi-owncloud
+    container_name: owncloud
+    ports:
+      - 8080:80
+    volumes:
+      - /media/usb/downloading:/var/www/html/data
+
+  dockerui:
+    image: hypriot/rpi-dockerui
+    container_name: docker_ui
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9000:9000
+    environment:
+      - VIRTUAL_HOST=dockerui.serverpi.home
+      - VIRTUAL_PORT=9091
+
+  nginxproxy:
+    image: nunofgs/rpi-nginx-proxy
+    container_name: nginxproxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  smbshare:
+    image: charlesmknox/rpi-samba:v2
+    container_name: samba
+    restart: always
+    ports:
+      - 137:137/tcp
+      - 137:137/udp
+      - 138:138/tcp
+      - 138:138/udp
+      - 139:139
+      - 445:445
+      - 445:445/udp
+    hostname: parenthostname
+    volumes:
+      - /media/usb:/share/data
+    command: -u "pa:qwerty" -u "mi:qwerty" -s "Media:/share/data/:rw:pa,mi"
