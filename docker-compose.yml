@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       - VIRTUAL_HOST=transmission.serverpi.home
-      - VIRTUAL_PORT=80
+      - VIRTUAL_PORT=9091
     ports:
       - 9091:9091
       - 51413:51413
@@ -20,7 +20,7 @@ services:
     container_name: owncloud
     environment:
       - VIRTUAL_HOST=owncloud.serverpi.home
-      - VIRTUAL_PORT=80
+      - VIRTUAL_PORT=8080
     ports:
       - 8080:80
     volumes:
@@ -35,7 +35,7 @@ services:
       - 9000:9000
     environment:
       - VIRTUAL_HOST=dockerui.serverpi.home
-      - VIRTUAL_PORT=80
+      - VIRTUAL_PORT=9000
 
   nginxproxy:
     image: nunofgs/rpi-nginx-proxy
