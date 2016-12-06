@@ -30,7 +30,7 @@ services:
     image: schoeffm/rpi-owncloud-mysql
     ports:
       - 3306:3306
-    enviroment:
+    environment:
       - OWNCLOUD_DB_USER=owncloud
       - OWNCLOUD_DB_PASSWORD=mycloud
       - MYSQL_ROOT_PASSWORD=foo
