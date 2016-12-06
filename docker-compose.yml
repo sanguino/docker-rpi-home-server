@@ -18,8 +18,9 @@ services:
   owncloud:
     image: fmemon/rpi-owncloud
     container_name: owncloud
-    ports:
-      - 8080:80
+    environment:
+      - VIRTUAL_HOST=owncloud.serverpi.home
+      - VIRTUAL_PORT=8080
     volumes:
       - /media/usb/downloading:/var/www/html/data
 
