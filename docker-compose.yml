@@ -28,7 +28,7 @@ services:
       
   owncloud-db:
     image: schoeffm/rpi-owncloud-mysql
-    container_name: owncloud_db
+    container_name: owncloud-db
     ports:
       - 3306:3306
     environment:
@@ -38,16 +38,29 @@ services:
 
   owncloud-data:
     image: schoeffm/rpi-owncloud-data
-    container_name: owncloud_data
+    container_name: owncloud-data
     environment:
-      - VIRTUAL_HOST=owncloud.serverpi.home
-      - VIRTUAL_PORT=8080
       - OWNCLOUD_DB_USER=owncloud
       - OWNCLOUD_DB_PASSWORD=mycloud
     ports:
       - 8080:80
     volumes:
-      - /media:/var/www/html/data    
+      - /media:/var/www/html/data
+  
+   owncloud:
+    image: schoeffm/rpi-owncloud
+    container_name: owncloud
+    ports:
+      - 8080:80
+      - 8443:443
+    links:
+      - owncloud-db:mysql
+    volumes_from:
+      - owncloud-data
+    environment:
+      - OWNCLOUD_SERVERNAME=owncloud.serverpi.home
+      - VIRTUAL_HOST=owncloud.serverpi.home
+      - VIRTUAL_PORT=8080
 
   nginxproxy:
     image: nunofgs/rpi-nginx-proxy
