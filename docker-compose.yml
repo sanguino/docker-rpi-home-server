@@ -47,7 +47,7 @@ services:
     volumes:
       - /media:/var/www/html/data
   
-   owncloud:
+  owncloud:
     image: schoeffm/rpi-owncloud
     container_name: owncloud
     ports:
