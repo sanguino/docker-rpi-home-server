@@ -28,6 +28,7 @@ services:
       
   owncloud-db:
     image: schoeffm/rpi-owncloud-mysql
+    container_name: owncloud_db
     ports:
       - 3306:3306
     environment:
