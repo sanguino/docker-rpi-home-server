@@ -12,7 +12,7 @@ services:
       - 51413:51413
       - 51413:51413/udp
     volumes:
-      - /media/usb/downloading:/var/lib/transmission-daemon/downloads
+      - /media/usb/downloading:/root/Downloads
       - ~/transmission-daemon:/etc/transmission-daemon
       
   dockerui:
