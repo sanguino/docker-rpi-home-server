@@ -42,8 +42,6 @@ services:
     environment:
       - OWNCLOUD_DB_USER=owncloud
       - OWNCLOUD_DB_PASSWORD=mycloud
-    ports:
-      - 8080:80
     volumes:
       - /media:/var/www/html/data
   
