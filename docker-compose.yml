@@ -25,12 +25,24 @@ services:
     environment:
       - VIRTUAL_HOST=dockerui.serverpi.home
       - VIRTUAL_PORT=9000
+      
+  ownclod-db:
+    image: schoeffm/rpi-owncloud-mysql
+    ports:
+       - 3306:3306
+     enviroment:
+       - OWNCLOUD_DB_USER=owncloud
+       - OWNCLOUD_DB_PASSWORD=mycloud
+       - MYSQL_ROOT_PASSWORD=foo
+        
   owncloud:
-    image: fmemon/rpi-owncloud
+    image: schoeffm/rpi-owncloud-data
     container_name: owncloud
     environment:
       - VIRTUAL_HOST=owncloud.serverpi.home
       - VIRTUAL_PORT=8080
+      - OWNCLOUD_DB_USER=owncloud
+      - OWNCLOUD_DB_PASSWORD=mycloud
     ports:
       - 8080:80
     volumes:
