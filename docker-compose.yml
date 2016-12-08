@@ -61,7 +61,7 @@ services:
       - VIRTUAL_PORT=8080
 
   nginxproxy:
-    image: nunofgs/rpi-nginx-proxy
+    image: lroguet/rpi-nginx-proxy
     container_name: nginxproxy
     ports:
       - 80:80
