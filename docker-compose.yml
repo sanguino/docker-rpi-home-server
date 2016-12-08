@@ -58,7 +58,7 @@ services:
     environment:
       - OWNCLOUD_SERVERNAME=owncloud.serverpi.home
       - VIRTUAL_HOST=owncloud.serverpi.home
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=8443
 
   nginxproxy:
     image: lroguet/rpi-nginx-proxy
